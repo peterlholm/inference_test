@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, xheight=device-height, initial-scale=1.0">
+  <title>Infer test</title>
+</head>
+
+<body>
+
+Start
+<form action="/api/infer" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <input type="submit" value="Submit" formaction="/api/infer" >
+    <input type="submit" value="notest" formaction="/api/tinfer" >
+    <br>
+    <input type="reset">
+</form>
+
+</body>
+</html>
