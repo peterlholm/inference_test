@@ -1,13 +1,19 @@
 import json
+from pathlib import Path
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, FileResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.views.decorators.csrf import csrf_exempt
 from .forms import ApiForm, ApiTestForm
+
+# Create your views here.
+
+RETURN_FILE = Path(__file__).parent / 'testimage' / 'dias.jpg'
 
 def index(request):
     "test"
     return HttpResponse("Hello, world. You're at the polls index.")
 
-
+@csrf_exempt
 def infer(request):
     "standard infer request"
     if request.method == 'POST':
@@ -20,7 +26,10 @@ def infer(request):
                 print(k,v)
             returnval= {"error": 0, 'error_text':"alt er i orden"}
             content = json.dumps(returnval)
-            return HttpResponse(content, content_type="application/json")
+            img = open(RETURN_FILE, 'rb')
+            response = FileResponse(img)
+            return response
+            #return HttpResponse(content, content_type="application/json")
         # form is not valide
         print(form.errors)
         returnval= {"error": 1, 'error_text':"Parameter error"}
@@ -33,6 +42,7 @@ def infer(request):
         res.status_code=405
         return res
 
+@csrf_exempt
 def tinfer(request):
     "standard infer request"
     print("Tinfer")
