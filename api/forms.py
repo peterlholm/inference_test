@@ -9,5 +9,5 @@ class ApiForm(forms.Form):
 class ApiTestForm(forms.Form):
     api_key = forms.CharField(max_length=100, required=False)
     index = forms.CharField(max_length=100, required=False)
-    # color = forms.FileField(required=False)
+    color = forms.FileField(required=False)
     # fringe = forms.FileField(required=False)
