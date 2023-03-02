@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-5l^03szm&$51tma)=_!(fh^5^2l3-8!*7&%(fss&co)owydvc7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['inference.danbots.com',' localhost', '127.0.0.1', 'localhost:8000']
-
+ALLOWED_HOSTS = ['inference.danbots.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
