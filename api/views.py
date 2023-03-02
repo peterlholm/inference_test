@@ -29,19 +29,13 @@ def save_uploaded_file(f, savefile):
 def infer(request):
     "standard infer request"
     if request.method == 'POST':
-        form = ApiForm(request.POST)
+        form = ApiForm(request.POST, request.FILES)
         if request.POST.get('api_key') != "123":
             return HttpResponseForbidden("No authorization")
         if form.is_valid():
-            print("Valid", request.FILES)
-            for k, v in request.FILES:
-                print(k,v)
-            #returnval= {"error": 0, 'error_text':"alt er i orden"}
-            #content = json.dumps(returnval)
             img = open(RETURN_FILE, 'rb')
             response = FileResponse(img)
             return response
-            #return HttpResponse(content, content_type="application/json")
         # form is not valide
         print(form.errors)
         returnval= {"error": 1, 'error_text':"Parameter error"}
