@@ -7,7 +7,7 @@ from .forms import ApiForm, ApiTestForm
 
 # Create your views here.
 
-RETURN_FILE = Path(__file__).parent / 'testimage' / 'file0.ply'
+RETURN_FILE = Path(__file__).parent / 'testimage' / 'file1.ply'
 
 def index(request):
     "test"
