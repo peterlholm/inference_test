@@ -11,14 +11,14 @@
 <body>
 
 Start
-<form action="/api/infer" method="post">
+<form method="post"  enctype="multipart/form-data">
     {% csrf_token %}
    
     {{ form }}
     <br>
     <input type="submit" value="Submit" formaction="/api/infer" >
     <input type="submit" value="tinfer" formaction="/api/tinfer" >
-    <input type="submit" value="finfer" formaction="/api/finfer" >
+    <input type="submit" value="finfer" formaction="http://server2.danbots.com/api/v1/inference" >
 
     <br>
     <input type="reset">

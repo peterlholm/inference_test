@@ -8,6 +8,7 @@ from .forms import ApiForm, ApiTestForm
 # Create your views here.
 
 RETURN_FILE = Path(__file__).parent / 'testimage' / 'file1.ply'
+RETURN_FILE = Path(__file__).parent / 'testimage/org' / 'pointcloud.ply'
 
 def index(request):
     "test"
@@ -50,6 +51,33 @@ def infer(request):
         res.status_code=405
         return res
     return HttpResponseBadRequest()
+
+@csrf_exempt
+def finfer(request):
+    "standard infer request med ply pointcloud retur"
+    if request.method == 'POST':
+        form = ApiForm(request.POST, request.FILES)
+        if request.POST.get('api_key') != "123":
+            return HttpResponseForbidden("No authorization")
+        if form.is_valid():
+            img = open(RETURN_FILE, 'rb')
+            response = FileResponse(img)
+            return response
+        # form is not valide
+        print(form.errors)
+        returnval= {"error": 1, 'error_text':"Parameter error"}
+        return HttpResponse(json.dumps(returnval), content_type="application/json")
+    if request.method == "GET":
+        form = ApiForm()
+        resp = render(request, 'finfer.html', context={'form': form})
+        resp.status_code=400
+        return resp
+    else:
+        res = HttpResponse("Method not allow" )
+        res.status_code=405
+        return res
+    return HttpResponseBadRequest()
+
 @csrf_exempt
 def pinfer(request):
     "standard infer request med png picture retur"
